@@ -151,6 +151,13 @@ module ApplicationHelper
     display_link_if_authorized(name, options, html_options)
   end
 
+  ##CSV Export
+  def export_link(name, options = {}, html_options = {})
+    options[:action] = :new
+    html_options[:class] = "btn btn-primary #{html_options[:class]}"
+    display_link_if_authorized(name, options, html_options)
+  end
+
   # renders a style=display based on an attribute properties
   def display?(attribute = true)
     "style=#{display(attribute)}"

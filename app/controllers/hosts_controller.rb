@@ -50,6 +50,11 @@ class HostsController < ApplicationController
       error e.to_s
       search = resource_base.search_for ''
     end
+
+    ## For CSV###
+    @hosts = Host.order(:name)
+    #############
+
     respond_to do |format|
       format.html do
         @hosts = search.includes(included_associations).paginate(:page => params[:page])
@@ -62,6 +67,12 @@ class HostsController < ApplicationController
       end
       format.yaml { render :text => search.all(:select => "hosts.name").map(&:name).to_yaml }
       format.json
+
+      ## For CSV###
+      format.csv { send_data @hosts.to_csv(col_sep: "\t") }
+      format.xls #{ send_data @hosts.to_csv(col_sep: "\t") }
+      #############
+
     end
   end
 

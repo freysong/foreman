@@ -92,6 +92,25 @@ module Menu
             menu.item :realms,            :caption => N_('Realms')
           end
         end
+        ##top menu
+        menu.sub_menu :hosts_menuinfo,      :caption => N_('INFO') do
+          menu.item :hosts,             :caption => N_('All hosts')
+          menu.item :newhost,           :caption => N_('New host'),
+                    :url_hash => {:controller => '/hosts', :action => 'new'}
+          if SETTINGS[:unattended]
+            menu.divider                :caption => N_('Provisioning Setup')
+            menu.item :architectures,   :caption => N_('Architectures')
+            menu.item :models,          :caption => N_('Hardware models')
+            menu.item :media,           :caption => N_('Installation media')
+            menu.item :operatingsystems,:caption => N_('Operating systems')
+            menu.divider                :caption => N_('Templates')
+            menu.item :partition_tables, :caption => N_('Partition tables'),
+                      :url_hash => { :controller => 'ptables', :action => 'index' }
+            menu.item :provisioning_templates, :caption => N_('Provisioning templates'),
+                      :url_hash => { :controller => 'provisioning_templates', :action => 'index' }
+          end
+        end
+
       end
     end
   end

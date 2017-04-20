@@ -5,6 +5,10 @@ require File.expand_path('../boot', __FILE__)
 require 'apipie/middleware/checksum_in_headers'
 require 'rails/all'
 
+####FOR CSV####
+require 'csv'
+###############
+
 require File.expand_path('../../config/settings', __FILE__)
 
 if File.exist?(File.expand_path('../../Gemfile.in', __FILE__))
